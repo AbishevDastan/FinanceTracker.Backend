@@ -2,7 +2,7 @@ using Application.AuthenticationHandlers.HashManager;
 using Application.AuthenticationHandlers.JwtManager;
 using Application.Extensions;
 using Application.Extensions.UserContext;
-using Application.Services.PostService;
+using Application.Services.ExpenseService;
 using Application.Services.UserService;
 using Domain.Abstractions;
 using Infrastructure;
@@ -50,10 +50,10 @@ builder.Services.AddAuthorization(options => options.DefaultPolicy =
 
 // Repositories
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IPostRepository, PostRepository>();
+builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
 
 // Services
-builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<IExpenseService, ExpenseService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IJwtManager, JwtManager>();
 builder.Services.AddTransient<IHashManager, HashManager>();
@@ -66,7 +66,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 //CORS
-builder.Services.AddCors(options => options.AddPolicy(name: "Social Network",
+builder.Services.AddCors(options => options.AddPolicy(name: "Finance Tracker",
     policy =>
     {
         policy.WithOrigins("https://localhost:4200", "http://localhost:4200")
@@ -107,10 +107,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Social Network"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Finance Tracker"));
 }
 
-app.UseCors("Social Network");
+app.UseCors("Finance Tracker");
 
 app.UseHttpsRedirection();
 

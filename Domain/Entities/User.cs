@@ -10,6 +10,5 @@
         public byte[] Salt { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public string Role { get; set; } = "Regular";
-        public List<Post> Posts { get; set; }
     }
 }

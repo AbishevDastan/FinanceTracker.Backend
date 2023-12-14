@@ -12,12 +12,12 @@ namespace Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            new PostConfiguration().Configure(modelBuilder.Entity<Post>());
             new UserConfiguration().Configure(modelBuilder.Entity<User>());
-            new FollowConfiguration().Configure(modelBuilder.Entity<Follow>());
+            new ExpenseConfiguration().Configure(modelBuilder.Entity<Expense>());
+            new CategoryConfiguration().Configure(modelBuilder.Entity<Category>());
         }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Follow> Follows { get; set; }
     }
 }

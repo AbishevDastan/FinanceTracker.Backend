@@ -1,5 +1,4 @@
-﻿using Application.UseCases.Follow;
-using Application.UseCases.Post;
+﻿using Application.UseCases.Expense;
 using Application.UseCases.User;
 using AutoMapper;
 using Domain.Entities;
@@ -17,22 +16,12 @@ namespace Application.Extensions
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
 
-            CreateMap<Post, PostDto>();
-            CreateMap<PostDto, Post>();
-            CreateMap<Post, AddPostDto>();
-            CreateMap<AddPostDto, Post>();
-            CreateMap<PostDto, AddPostDto>();
-            CreateMap<AddPostDto, PostDto>();
-            CreateMap<Post, UpdatePostDto>();
-            CreateMap<UpdatePostDto, Post>();
-            CreateMap<PostDto, UpdatePostDto>();
-            CreateMap<UpdatePostDto, PostDto>();
-
-            CreateMap<PostReaction, PostReactionDto>();
-            CreateMap<PostReactionDto, PostReaction>();
-
-            CreateMap<Follow, FollowDto>();
-            CreateMap<FollowDto, Follow>();
+            CreateMap<Expense, ExpenseDto>();
+            CreateMap<ExpenseDto, Expense>();
+            CreateMap<Expense, AddExpenseDto>();
+            CreateMap<AddExpenseDto, Expense>();
+            CreateMap<Expense, UpdateExpenseDto>();
+            CreateMap<UpdateExpenseDto, Expense>();
         }
     }
 }

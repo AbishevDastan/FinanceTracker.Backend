@@ -1,7 +1,6 @@
 ﻿using Application.AuthenticationHandlers.HashManager;
 using Application.AuthenticationHandlers.JwtManager;
 using Application.Extensions.UserContext;
-using Application.UseCases.Follow;
 using Application.UseCases.User;
 using AutoMapper;
 using Domain.Abstractions;
@@ -14,15 +13,16 @@ namespace Application.Services.UserService
         private readonly IUserRepository _userRepository;
         private readonly IHashManager _hashManager;
         private readonly IJwtManager _jwtManager;
-        private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IHashManager hashManager, IJwtManager jwtManager, IUserContextService userContextService, IMapper mapper)
+        public UserService(IUserRepository userRepository,
+            IHashManager hashManager,
+            IJwtManager jwtManager,
+            IMapper mapper)
         {
             _userRepository = userRepository;
             _hashManager = hashManager;
             _jwtManager = jwtManager;
-            _userContextService = userContextService;
             _mapper = mapper;
         }
 
@@ -77,46 +77,14 @@ namespace Application.Services.UserService
             }
         }
 
-        public async Task<bool> FollowUser(int followerId, int followingId)
-        {
-            followerId = _userContextService.GetCurrentUserId();
+        //public async Task<List<UserDto>> SearchUsers(string searchText)
+        //{
+        //    var result = await _userRepository.SearchUsers(searchText);
 
-            if (!await _userRepository.AreUsersFollowingEachOther(followerId, followingId))
-            {
-                if (followerId != followingId)
-                {
-                    await _userRepository.FollowUser(followerId, followingId);
-                    return true;
-                }
-                throw new Exception("You can not follow yourself.");
-            }
-            throw new Exception("You are already following this user.");
-        }
+        //    if (result == null || result.Count <= 0)
+        //        throw new InvalidOperationException("Users not found.");
 
-        public async Task<bool> UnfollowUser(int followerId, int followingId)
-        {
-            followerId = _userContextService.GetCurrentUserId();
-
-            if (await _userRepository.AreUsersFollowingEachOther(followerId, followingId))
-            {
-                if (followerId != followingId)
-                {
-                    await _userRepository.UnfollowUser(followerId, followingId);
-                    return true;
-                }
-                throw new Exception("You can not unfollow yourself.");
-            }
-            throw new Exception("You can not unfollow the user, who is not followed by you.");
-        }
-
-        public async Task<List<UserDto>> SearchUsers(string searchText)
-        {
-            var result = await _userRepository.SearchUsers(searchText);
-
-            if (result == null || result.Count <= 0)
-                throw new InvalidOperationException("Users not found.");
-
-            return _mapper.Map<List<UserDto>>(result);
-        }
+        //    return _mapper.Map<List<UserDto>>(result);
+        //}
     }
 }

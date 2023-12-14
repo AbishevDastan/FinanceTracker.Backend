@@ -12,12 +12,10 @@ namespace Web.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IUserContextService _userContextService;
 
-        public UserController(IUserService userService, IUserContextService userContextService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _userContextService = userContextService;
         }
 
         [HttpGet]
@@ -66,31 +64,15 @@ namespace Web.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{searchText}/search")]
-        public async Task<ActionResult<List<UserDto>>> SearchUsers(string searchText)
-        {
-            var result = await _userService.SearchUsers(searchText);
+        //[HttpGet("{searchText}/search")]
+        //public async Task<ActionResult<List<UserDto>>> SearchUsers(string searchText)
+        //{
+        //    var result = await _userService.SearchUsers(searchText);
 
-            if (result == null)
-                return NotFound();
+        //    if (result == null)
+        //        return NotFound();
 
-            return Ok(result);
-        }
-
-        [HttpPost("{followingId}/follow")]
-        [Authorize]
-        public async Task<ActionResult> FollowUser(int followingId)
-        {
-            var result = await _userService.FollowUser(_userContextService.GetCurrentUserId(), followingId);
-            return Ok(result);
-        }
-
-        [HttpDelete("{followingId}/unfollow")]
-        [Authorize]
-        public async Task<ActionResult> UnfollowUser(int followingId)
-        {
-            var result = await _userService.UnfollowUser(_userContextService.GetCurrentUserId(), followingId);
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
     }
 }
