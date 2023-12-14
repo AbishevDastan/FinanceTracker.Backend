@@ -11,12 +11,12 @@ namespace Infrastructure.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Email);
-            builder.Property(x => x.Name);
-            builder.Property(x => x.Surname);
-            builder.Property(x => x.Hash);
-            builder.Property(x => x.Salt);
-            builder.Property(x => x.Role);
+            builder.Property(x => x.Email).IsRequired();
+            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Surname).IsRequired();
+            builder.Property(x => x.Hash).IsRequired();
+            builder.Property(x => x.Salt).IsRequired();
+            builder.Property(x => x.Role).IsRequired();
 
             builder.ToTable("Users");
         }

@@ -1,5 +1,6 @@
 ﻿using Application.Extensions.UserContext;
 using Application.Services.ExpenseService;
+using Application.UseCases.Category;
 using Application.UseCases.Expense;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace Web.Controllers
 
         [HttpGet("expenses")]
         [Authorize]
-        public async Task<ActionResult<List<ExpenseDto>>> GetExpensesByUserId()
+        public async Task<ActionResult<List<CategoryDto>>> GetExpensesByUserId()
         {
             var expenses = await _expenseService.GetExpensesByUserId(_userContextService.GetCurrentUserId());
 
@@ -33,7 +34,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ExpenseDto>> GetExpense(int id)
+        public async Task<ActionResult<CategoryDto>> GetExpense(int id)
         {
             var expense = await _expenseService.GetExpense(id);
 
@@ -45,7 +46,7 @@ namespace Web.Controllers
 
         [HttpGet("{userId}/expense-by-user-id")]
         [Authorize]
-        public async Task<ActionResult<List<ExpenseDto>>> GetExpenseByUserId(int id)
+        public async Task<ActionResult<List<CategoryDto>>> GetExpenseByUserId(int id)
         {
             var expense = await _expenseService.GetExpenseByUserId(id, _userContextService.GetCurrentUserId());
 
@@ -57,7 +58,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<ExpenseDto>> AddExpense(AddExpenseDto addExpenseDto)
+        public async Task<ActionResult<CategoryDto>> AddExpense(AddCategoryDto addExpenseDto)
         {
             var result = await _expenseService.AddExpense(addExpenseDto, _userContextService.GetCurrentUserId());
 
@@ -69,7 +70,7 @@ namespace Web.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<ExpenseDto>> UpdateExpense(UpdateExpenseDto updateExpenseDto, int id)
+        public async Task<ActionResult<CategoryDto>> UpdateExpense(UpdateCategoryDto updateExpenseDto, int id)
         {
             var result = await _expenseService.UpdateExpense(updateExpenseDto, id, _userContextService.GetCurrentUserId());
 

@@ -2,6 +2,7 @@ using Application.AuthenticationHandlers.HashManager;
 using Application.AuthenticationHandlers.JwtManager;
 using Application.Extensions;
 using Application.Extensions.UserContext;
+using Application.Services.CategoryService;
 using Application.Services.ExpenseService;
 using Application.Services.UserService;
 using Domain.Abstractions;
@@ -51,9 +52,10 @@ builder.Services.AddAuthorization(options => options.DefaultPolicy =
 // Repositories
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 // Services
-builder.Services.AddTransient<IExpenseService, ExpenseService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IJwtManager, JwtManager>();
 builder.Services.AddTransient<IHashManager, HashManager>();

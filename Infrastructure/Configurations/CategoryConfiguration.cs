@@ -11,7 +11,12 @@ namespace Infrastructure.Configurations
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
 
-            builder.Property(c => c.Name);
+            builder.Property(c => c.Name).IsRequired();
+
+            builder.HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .IsRequired();
 
             builder.ToTable("Categories");
         }

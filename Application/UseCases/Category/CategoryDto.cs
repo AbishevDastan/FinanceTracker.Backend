@@ -1,13 +1,9 @@
-﻿namespace Domain.Entities
+﻿namespace Application.UseCases.Category
 {
-    public class Category
+    public class CategoryDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
-        public List<Expense> Expenses { get; set; }
-
         public int UserId { get; set; }
-        public User User { get; set; }
     }
 }

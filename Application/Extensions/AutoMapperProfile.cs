@@ -1,4 +1,5 @@
-﻿using Application.UseCases.Expense;
+﻿using Application.UseCases.Category;
+using Application.UseCases.Expense;
 using Application.UseCases.User;
 using AutoMapper;
 using Domain.Entities;
@@ -15,6 +16,13 @@ namespace Application.Extensions
             CreateMap<RegisterUserDto, User>();
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
+            CreateMap<Category, AddCategoryDto>();
+            CreateMap<AddCategoryDto, Category>();
+            CreateMap<Category, UpdateCategoryDto>();
+            CreateMap<UpdateCategoryDto, Category>();
 
             CreateMap<Expense, ExpenseDto>();
             CreateMap<ExpenseDto, Expense>();
